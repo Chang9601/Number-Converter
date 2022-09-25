@@ -4,8 +4,6 @@
 #include <string.h>
 #include "convert.h"
 
-const char *bases = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
 bool is_number(const char *arg)
 {
 	for (int i = 0; arg[i]; i++)
@@ -34,7 +32,7 @@ int calculate_digit_count(int number, int base)
 
 void reverse_number(char *number)
 {
-	for(int i = 0, j = strlen(number) - 1; i < j; i++, j--)
+	for (int i = 0, j = strlen(number) - 1; i < j; i++, j--)
 	{
 		char temp = number[i];
 		number[i] = number[j];
@@ -44,6 +42,7 @@ void reverse_number(char *number)
 
 char *convert(const char *base_from, const char *base_to, const char *number)
 {
+	const char *bases = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	int length = strlen(number);
 	int from = atoi(base_from);
 	int to = atoi(base_to);
