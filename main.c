@@ -35,5 +35,6 @@ int main(int argc, char *argv[])
 	char *converted_number = convert(base_from, base_to, number);
 	printf("%s in base %s converted to %s int base %s", number, base_from, converted_number, base_to);
 
+	free(converted_number);
 	return EXIT_SUCCESS;
 }
