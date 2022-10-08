@@ -4,7 +4,7 @@
 #include <string.h>
 #include "convert.h"
 
-bool is_number(const char *arg)
+bool isNum(const char *arg)
 {
 	for (int i = 0; arg[i]; i++)
 			if (arg[i] < '0' || arg[i] > '9')
@@ -12,58 +12,55 @@ bool is_number(const char *arg)
 	return true;
 }
 
-bool is_in_bound(int number)
+bool isInBound(int num)
 {
-	return number >= 2 && number <= 36;
+	return num >= 2 && num <= 36;
 }
 
-int calculate_digit_count(int number, int base)
+int cntDigit(int num, int base)
 {
-	int digit_count = 0;
+	int cnt = 0;
 
-	while (number)
-	{
-		number /= base;
-		digit_count++;
+	while (num) {
+		num /= base;
+		cnt++;
 	}
 
-	return digit_count;
+	return cnt;
 }
 
-void reverse_number(char *number)
+void reverseNum(char *num)
 {
-	for (int i = 0, j = strlen(number) - 1; i < j; i++, j--)
-	{
-		char temp = number[i];
-		number[i] = number[j];
-		number[j] = temp;	
+	for (int i = 0, j = strlen(num) - 1; i < j; i++, j--) {
+		char temp = num[i];
+		num[i] = num[j];
+		num[j] = temp;	
 	}
 }
 
-char *convert(const char *base_from, const char *base_to, const char *number)
+char *convert(const char *baseFrom, const char *baseTo, const char *chNum)
 {
 	const char *bases = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	int length = strlen(number);
-	int from = atoi(base_from);
-	int to = atoi(base_to);
-	int num = 0;
+	int len = strlen(chNum);
+	int from = atoi(baseFrom);
+	int to = atoi(baseTo);
+	int intNum = 0;
 	int base = 1;
 	int idx = 0;
 
 	// Convert to decimal	
-	for (int i = length - 1; i >= 0; i--, base *= from)
-		num += (number[i] - '0') * base;
+	for (int i = len - 1; i >= 0; i--, base *= from)
+		intNum += (chNum[i] - '0') * base;
 
 	// Convert to target base
-	int digit_count = calculate_digit_count(num, to);
-	char *converted_number = calloc(digit_count, sizeof(*converted_number));
+	int cnt = cntDigit(intNum, to);
+	char *convertedNum = calloc(cnt, sizeof(*convertedNum));
 
-	do
-	{
-		converted_number[idx++] = bases[num % to];
-		num /= to;		
-	}while (num);
+	do {
+		convertedNum[idx++] = bases[intNum % to];
+		intNum /= to;		
+	} while (intNum);
 
-	reverse_number(converted_number);
-	return converted_number;
+	reverseNum(convertedNum);
+	return convertedNum;
 }

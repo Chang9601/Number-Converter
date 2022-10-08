@@ -2,10 +2,10 @@
 #define CONVERT_H
 #include <stdbool.h>
 
-bool is_number(const char *arg);
-bool is_in_bound(int number);
-int calculate_digit_count(int number, int base);
-void reverse_number(char *number);
-char *convert(const char *base_from, const char *base_to, const char *number);
+bool isNum(const char *arg);
+bool isInBound(int num);
+int cntDigit(int num, int base);
+void reverseNum(char *num);
+char *convert(const char *baseFrom, const char *baseTo, const char *num);
 
 #endif
